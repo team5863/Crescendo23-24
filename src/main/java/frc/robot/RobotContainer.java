@@ -11,6 +11,7 @@ import frc.robot.commands.TeleOPDrive;
 //import frc.robot.commands.TestMotorRun;
 import frc.robot.subsystems.DriveTrain;
 //import frc.robot.subsystems.Test;
+import frc.robot.commands.Shooter;
 
 public class RobotContainer {
 
@@ -37,6 +38,7 @@ public class RobotContainer {
 
     //buttons
      private final JoystickButton testButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+     private final JoystickButton shootButton = new JoystickButton(operator, XboxController.Button.kA.value);
 
   public RobotContainer() {
      m_driveTrain.setDefaultCommand(
@@ -60,6 +62,7 @@ public class RobotContainer {
     //Driver
 
     //Operator
+    shootButton.whileTrue( new Shooter());
   }
  
   public Command getAutonomousCommand() {

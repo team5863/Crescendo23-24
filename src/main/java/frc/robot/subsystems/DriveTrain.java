@@ -19,7 +19,6 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 
 
-
 public class DriveTrain extends SubsystemBase {
 //Motors
 public static CANSparkMax leftFrontMotor;
