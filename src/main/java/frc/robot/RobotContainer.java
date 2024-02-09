@@ -10,6 +10,7 @@ import frc.robot.autos.OneNoteLeave;
 import frc.robot.commands.TeleOPDrive;
 //import frc.robot.commands.TestMotorRun;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ShooterSub;
 //import frc.robot.subsystems.Test;
 import frc.robot.commands.Shooter;
 
@@ -62,7 +63,8 @@ public class RobotContainer {
     //Driver
 
     //Operator
-    shootButton.whileTrue( new Shooter());
+    shootButton.whileTrue(new Shooter());
+    
   }
  
   public Command getAutonomousCommand() {

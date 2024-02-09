@@ -24,6 +24,10 @@ public final class Constants {
     public static final int rightFrontSparkiD = 2;
     public static final int rightBackSparkiD = 5;
 
+    //Motors
+    public static final int topNEOMotoriD = 6;
+     public static final int bottomNEOMotoriD = 7;
+
     //Sensors
    // public static final int GyroID = 5;
 
