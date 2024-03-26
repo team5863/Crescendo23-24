@@ -4,35 +4,56 @@
 
 package frc.robot;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
+//import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 public final class Constants {
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+
+  public static class Shooter {
+    public static final int shooterSparkMax = 6;
   }
 
-  public static class Drivetrain {
+  public final class Serializer {
+    public static final int serializerSparkMax = 5;
+  }
+
+  public static class Intake {
+    public static final int intakeSparkMax = 9;
+  }
+
+  public static class Climber {
+    public static final int climberID = 7;
+    public static final int armLimitSwitch = 0;
+
+  }
+
+  public static class DifferentialConstants {
     //Spark IDs
-    public static final int leftFrontSparkiD = 3;
-    public static final int leftBackSparkiD = 4;
-    public static final int rightFrontSparkiD = 2;
-    public static final int rightBackSparkiD = 5;
+    public static final int leftFrontSparkiD = 2;
+    public static final int leftBackSparkiD = 1;
+    public static final int rightFrontSparkiD = 3;
+    public static final int rightBackSparkiD = 4;
 
     //Sensors
-   // public static final int GyroID = 5;
+    public static final int GyroID = 8;
 
     //Positions
-    public static final double balanceSetPoint = 0;
-   
+  
     //Ratios
     public static final double driveTrainRatio = (1/10.71);
     public static final double wheelCircumference = (Math.PI * 6);
 
   }
+
+  /* Testing drive trajectory auto control
+  public static class DriveAutoConstants {
+    public static final double kTrackwidthMeters = 0.69;
+    public static final DifferentialDriveKinematics kDriveKinematics =
+        new DifferentialDriveKinematics(kTrackwidthMeters);
+    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 1;
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;  
+   
+
+  }*/
 }

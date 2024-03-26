@@ -14,7 +14,7 @@ public class DistanceDriveTank extends Command {
 
   private double distance;
   public DistanceDriveTank(DriveTrain m_driveTrain, double distance) {
-    // Use addRequirements() here to declare subsystem dependencies.
+ 
     this.m_driveTrain = m_driveTrain;
     addRequirements(m_driveTrain);
     this.distance = distance;
@@ -53,6 +53,6 @@ public class DistanceDriveTank extends Command {
   @Override
   public boolean isFinished() {
 
-    return DriveTrain.dRight_PidController.atSetpoint() && DriveTrain.dLeft_PidController.atSetpoint();
+    return DriveTrain.kPID_distanceRight.atSetpoint() && DriveTrain.kPID_distanceLeft.atSetpoint();
   }
 }

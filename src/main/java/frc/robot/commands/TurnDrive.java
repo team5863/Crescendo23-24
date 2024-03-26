@@ -30,7 +30,7 @@ public class TurnDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //m_driveTrain.turn(heading);
+    m_driveTrain.turn(heading);
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +45,6 @@ public class TurnDrive extends Command {
   @Override
   public boolean isFinished() {
 
-    return DriveTrain.hRight_PidController.atSetpoint();
+    return DriveTrain.kPID_headingRight.atSetpoint();
   }
 }

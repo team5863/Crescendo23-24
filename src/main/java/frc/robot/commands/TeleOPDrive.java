@@ -23,7 +23,7 @@ public class TeleOPDrive extends Command {
 
   @Override
   public void execute() {
-    m_driveTrain.arcadeDrive(speed.getAsDouble(), rotation.getAsDouble());
+    m_driveTrain.arcadeDrive(speed.getAsDouble(), -rotation.getAsDouble());
   }
 
  

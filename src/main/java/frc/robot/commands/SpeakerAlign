@@ -1,0 +1,81 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+
+//This class has not been officially finished
+
+
+package frc.robot.commands;
+
+import java.util.Optional;
+import java.util.function.DoubleSupplier;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.LimelightHelpers;
+import frc.robot.subsystems.DriveTrain;
+
+public class SpeakerAlign extends Command {
+  private final DriveTrain m_driveTrain;
+  DoubleSupplier speed;
+  DoubleSupplier rotation;
+  Optional<Alliance> ally = DriverStation.getAlliance();
+
+  public SpeakerAlign(DriveTrain m_driveTrain, DoubleSupplier speed, DoubleSupplier rotation) {
+    this.speed = speed;
+    this.rotation = rotation;
+    this.m_driveTrain = m_driveTrain;
+    addRequirements(m_driveTrain);
+  }
+
+  @Override
+  public void initialize() {
+
+  }
+
+  @Override
+  public void execute() {
+    double kp = -0.02;
+    double xSpeed = speed.getAsDouble();
+    double zRotation = rotation.getAsDouble();
+
+    if(LimelightHelpers.getTV("limelight") == true){
+            if(ally.get() == Alliance.Red){
+                LimelightHelpers.setPriorityTagID("limelight", 4);
+                zRotation = LimelightHelpers.getTX("limelight") * kp;
+            }
+        
+        if(ally.get() == Alliance.Blue){
+            LimelightHelpers.setPriorityTagID("limelight", 7);
+                zRotation = LimelightHelpers.getTX("limelight") * kp;
+        }else {
+
+                LimelightHelpers.setPriorityTagID("limelight", 0);
+                zRotation = LimelightHelpers.getTX("limelight") * kp;
+                }
+            }
+        }
+        
+
+                
+  /*   if(LimelightHelpers.getTA("limelight") < 0.9 && LimelightHelpers.getTA("limelight") != 0) {
+        xSpeed = -0.5;
+        }else{
+        xSpeed = speed.getAsDouble();
+    }   
+  
+    m_driveTrain.arcadeDrive(xSpeed, zRotation);
+}*/
+   
+  @Override
+  public void end(boolean interrupted) {
+    m_driveTrain.arcadeDrive(0.0, 0);
+  }
+
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+}

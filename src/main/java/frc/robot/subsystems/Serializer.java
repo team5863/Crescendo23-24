@@ -1,13 +1,15 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import edu.wpi.first.math.MathUtil;
 
-public class Test extends SubsystemBase {
-    public static CANSparkMax TestMotor;
+public class Serializer extends SubsystemBase {
+    public  CANSparkMax serializerMotor;
     public static PIDController m_PidController;
     public static PIDController h_PidController;
     RelativeEncoder Encoder;
@@ -22,12 +24,16 @@ public class Test extends SubsystemBase {
       h_ki = 0,
       h_kd = 0;
 
-    public Test() {
+    public Serializer() {
 
-
-        TestMotor = new CANSparkMax(7, MotorType.kBrushless);
+        serializerMotor = new CANSparkMax(Constants.Serializer.serializerSparkMax, MotorType.kBrushless);
         //armMotor.setSmartCurrentLimit(110, 100);
-        Encoder = TestMotor.getEncoder();
+        Encoder = serializerMotor.getEncoder();
+
+        serializerMotor.restoreFactoryDefaults();
+        
+        serializerMotor.setIdleMode(IdleMode.kCoast);
+
 
         m_PidController = new PIDController(m_kp, m_ki, m_kd);
         h_PidController = new PIDController(h_kp, h_ki, h_kd);
@@ -43,11 +49,18 @@ public class Test extends SubsystemBase {
          m_PidController.setTolerance(1);
     }
 
-    public void testRun(double speed) {
-        TestMotor.set(-speed);
+    public void serialize(double speed) {
+        serializerMotor.set(-speed);
+    }
+
+    public void autoShoot(double target) {
+        m_PidController.setSetpoint(target);
+        double speedOutput = MathUtil.clamp(m_PidController.calculate(Encoder.getPosition()), -0.8, 0.8);
+        serialize(-speedOutput);
     }
 
     @Override
     public void periodic() {
+        //SmartDashboard.putNumber("Arm Position", Encoder.getPosition());
     }
 }
